@@ -1,0 +1,528 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "RSS Read1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Format a date",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Date & Time1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Rename Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Keys": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Compression",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Crypto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Image",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Image1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-07T09:25:35.381Z",
+  "id": "KOZ7o6VmpivnXMjR",
+  "meta": null,
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        -40
+      ],
+      "id": "ed4b2434-982e-45cc-901d-9664a238cfbf",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://techcrunch.com/rss",
+        "options": {
+          "ignoreSSL": false
+        }
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        100,
+        -40
+      ],
+      "id": "84af7512-5cf4-4c79-ad4f-f2c50da7eb1a",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "operation": "addToDate",
+        "magnitude": "={{ $json.pubDate }}",
+        "duration": 3,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        500,
+        -480
+      ],
+      "id": "4a52c76d-9ee0-407b-b13d-702f84c67850",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d26eecb9-1529-4f8b-bfd3-0a90873cd549",
+              "leftValue": "={{ $json.creator }}",
+              "rightValue": "Anthony",
+              "operator": {
+                "type": "string",
+                "operation": "startsWith"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        540,
+        80
+      ],
+      "id": "4b4f4e7a-bd48-4e70-bcd0-e97b5b3c77c1",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "categories",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        500,
+        420
+      ],
+      "id": "38182096-59ce-4283-ad20-2d1d6bd33629",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "title",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        500,
+        240
+      ],
+      "id": "c18130ed-c46e-43d4-b965-badbe42345c3",
+      "name": "Remove Duplicates"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "content",
+              "renameField": true,
+              "outputFieldName": "allContent"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        720,
+        420
+      ],
+      "id": "73e2346f-9ef9-4442-9f40-6d8c4e27acbc",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "url": "https://www.theverge.com/rss/index.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        220,
+        620
+      ],
+      "id": "2af610d8-d7ff-4250-a6ca-3aebe8d5c868",
+      "name": "RSS Read1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        500,
+        660
+      ],
+      "id": "86dd5479-a14c-4726-9101-d3c69cef3378",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "keys": {
+          "key": [
+            {
+              "currentKey": "isoDate",
+              "newKey": "date"
+            }
+          ]
+        },
+        "additionalOptions": {}
+      },
+      "type": "n8n-nodes-base.renameKeys",
+      "typeVersion": 1,
+      "position": [
+        720,
+        660
+      ],
+      "id": "94ae036d-5dfa-4653-9da2-51dbefe6071f",
+      "name": "Rename Keys"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "date"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        940,
+        660
+      ],
+      "id": "84573ebc-69cd-41df-9bec-ed26a4bf437a",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "field": "title"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        500,
+        880
+      ],
+      "id": "2cad5faf-21ab-406c-b5f4-e15313087fdf",
+      "name": "Summarize"
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "excelFile",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        500,
+        1080
+      ],
+      "id": "f31106d7-cd76-4663-915d-1631d4bf6aa9",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "operation": "compress",
+        "binaryPropertyName": "excelFile",
+        "fileName": "compressExcelFile.zip",
+        "binaryPropertyOutput": "compresExcel"
+      },
+      "type": "n8n-nodes-base.compression",
+      "typeVersion": 1.1,
+      "position": [
+        740,
+        1080
+      ],
+      "id": "14d1ff38-20aa-49f4-a203-516b59bc2bed",
+      "name": "Compression"
+    },
+    {
+      "parameters": {
+        "type": "SHA256",
+        "binaryData": true,
+        "binaryPropertyName": "excelFile"
+      },
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [
+        720,
+        1300
+      ],
+      "id": "64da35ae-cdfe-42a6-89c5-fad8c1d77cf4",
+      "name": "Crypto"
+    },
+    {
+      "parameters": {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Apple_Computer_Logo_rainbow.svg",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        200,
+        1600
+      ],
+      "id": "da7df4cb-58da-4f60-9a6f-c3dda0412526",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "resize",
+        "width": 200,
+        "height": 200,
+        "resizeOption": "ignoreAspectRatio",
+        "options": {
+          "format": "jpeg"
+        }
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        420,
+        1600
+      ],
+      "id": "0b6fb111-b6ec-4430-97a1-9e6ef45f87de",
+      "name": "Edit Image"
+    },
+    {
+      "parameters": {
+        "operation": "resize",
+        "options": {
+          "format": "jpeg"
+        }
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        400,
+        1840
+      ],
+      "id": "34bc4277-138d-4471-b05f-d11a9ae3e7fe",
+      "name": "Edit Image1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  const content = item.json.content\n  const imgMatch = content.match(/<img[^>]+src=[\"'](.*?)[\"']/i);\n  \n  if(item.json.title) {\n    item.json.title = `ACADEMY 360 - ${item.json.title}`\n  };\n  if(imgMatch && imgMatch[1]) {\n    item.json.image = imgMatch[1]\n  }\n\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        1420
+      ],
+      "id": "10ffdecf-4346-422b-8377-f063339b2f08",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.pubDate }}",
+        "format": "custom",
+        "customFormat": "04/DD/yyyy",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        500,
+        -280
+      ],
+      "id": "45d6daa3-0eef-487a-af6b-cdc17836e26e",
+      "name": "Format a date"
+    },
+    {
+      "parameters": {
+        "operation": "subtractFromDate",
+        "magnitude": "={{ $json.pubDate }}",
+        "timeUnit": "years",
+        "duration": 5,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        500,
+        -100
+      ],
+      "id": "c109f433-ed06-415c-8d14-8d4ee6be60bd",
+      "name": "Date & Time1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-21T12:25:31.000Z",
+  "versionId": "f63418e9-88df-4590-a7f0-854edf3c6efe"
+}
