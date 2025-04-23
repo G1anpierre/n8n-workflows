@@ -1,0 +1,285 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-23T10:59:33.490Z",
+  "id": "XMkekRt8OqeBbf63",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Loop",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -380,
+        60
+      ],
+      "id": "7db972f8-8382-46ab-8fca-4be852b82255",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://techcrunch.com/feed/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        -160,
+        60
+      ],
+      "id": "f3ca621e-8add-4192-92c0-3f1ceba1c1a9",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "batchSize": 5,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        60,
+        60
+      ],
+      "id": "916047a8-59b2-48ab-bfcd-20c091081a51",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1dUqXln0Mdx4jFeVCprcJMDt9uU-_yp1HFc4PUboR1a0",
+          "mode": "list",
+          "cachedResultName": "loop-n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1dUqXln0Mdx4jFeVCprcJMDt9uU-_yp1HFc4PUboR1a0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1dUqXln0Mdx4jFeVCprcJMDt9uU-_yp1HFc4PUboR1a0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "creator": "={{ $('Loop Over Items').item.json.creator }}",
+            "title": "={{ $json.tittle_custom }}",
+            "link": "={{ $('Loop Over Items').item.json.link }}",
+            "pubDate": "={{ $('Loop Over Items').item.json.pubDate }}",
+            "dc:creator": "={{ $('Loop Over Items').item.json['dc:creator'] }}",
+            "content": "={{ $('Loop Over Items').item.json.content }}",
+            "contentSnippet": "={{ $('Loop Over Items').item.json.contentSnippet }}",
+            "guid": "={{ $('Loop Over Items').item.json.guid }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "creator",
+              "displayName": "creator",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "link",
+              "displayName": "link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pubDate",
+              "displayName": "pubDate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "dc:creator",
+              "displayName": "dc:creator",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "content",
+              "displayName": "content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "contentSnippet",
+              "displayName": "contentSnippet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "guid",
+              "displayName": "guid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "categories",
+              "displayName": "categories",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "isoDate",
+              "displayName": "isoDate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        500,
+        160
+      ],
+      "id": "2f8be213-1ce5-4365-b486-e142901fb6cf",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4DIfnCp89zx6D5hH",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2191ac3d-e618-4944-ae8a-ea1b66c9ed08",
+              "name": "tittle_custom",
+              "value": "=GIAN -  {{ $json.title }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        300,
+        140
+      ],
+      "id": "572e2efd-5204-4e91-9475-2e6b4d4863f8",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-23T11:16:27.000Z",
+  "versionId": "2455ee7f-e4c6-4702-a2fd-4d137c96ea69"
+}
