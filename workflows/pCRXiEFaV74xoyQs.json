@@ -1,0 +1,44 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-04-21T13:30:55.546Z",
+  "id": "pCRXiEFaV74xoyQs",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 5",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "026abb55-97dc-4e5e-90f6-dc8ee9eeb05f",
+        "authentication": "basicAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -260,
+        -380
+      ],
+      "id": "9679d186-eb34-4346-aba0-d2bb60f96a99",
+      "name": "Webhook",
+      "webhookId": "026abb55-97dc-4e5e-90f6-dc8ee9eeb05f",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "lxXBcjFbTBEB10Re",
+          "name": "Unnamed credential"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-21T16:22:52.000Z",
+  "versionId": "3844e16f-33c6-4e66-a5ff-913d74fd3fb6"
+}
