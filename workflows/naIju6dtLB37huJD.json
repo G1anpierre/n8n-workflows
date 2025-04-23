@@ -1,0 +1,315 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-06T15:04:44.598Z",
+  "id": "naIju6dtLB37huJD",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        0
+      ],
+      "id": "5879b557-070f-42ef-99a2-adf120664d1d",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3688288d-0f31-4760-a68f-4679fb3b4143",
+              "name": "language",
+              "value": "spanish",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        40,
+        0
+      ],
+      "id": "99e3c7fc-0946-40a6-a481-0d56fd634e2b",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "url": "https://exercisedb.p.rapidapi.com/exercises",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "limit",
+              "value": "10"
+            },
+            {
+              "name": "offset",
+              "value": "0"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "exercisedb.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "cf4e7ad37emsh5b6c71d668d7381p172c03jsn21817ac04af5"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ],
+      "id": "75d1d2fa-3ef5-46b5-a2d8-80d0f2f8d003",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        480,
+        0
+      ],
+      "id": "5e43b93a-bc61-4e6e-8d16-3acbceb5fa1f",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=I want you to translate to:  {{ $('Edit Fields').item.json.language }}\n\nThis following content: {{ $json.instructions }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        700,
+        0
+      ],
+      "id": "6f3d5368-79c7-4b60-a580-a43a55a55f86",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "W612lICBDO5NQYnR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1J9FAsB3oKf9iPUGTnVCjEdBLBbHX361nea6Rvr5U9ds",
+          "mode": "list",
+          "cachedResultName": "ExcerciseDB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1J9FAsB3oKf9iPUGTnVCjEdBLBbHX361nea6Rvr5U9ds/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1J9FAsB3oKf9iPUGTnVCjEdBLBbHX361nea6Rvr5U9ds/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $('Loop Over Items').item.json.name }}",
+            "image": "={{ $('Loop Over Items').item.json.gifUrl }}",
+            "language": "={{ $('Edit Fields').item.json.language }}",
+            "target": "={{ $('HTTP Request').item.json.target }}",
+            "instructions": "={{ $json.message.content }}",
+            "bodypart": "={{ $('Loop Over Items').item.json.bodyPart }}"
+          },
+          "matchingColumns": [
+            "name"
+          ],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "bodypart",
+              "displayName": "bodypart",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "image",
+              "displayName": "image",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "target",
+              "displayName": "target",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "language",
+              "displayName": "language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "instructions",
+              "displayName": "instructions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1080,
+        20
+      ],
+      "id": "21f502e1-30b0-4c00-b2c7-6a4a2199dc22",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4DIfnCp89zx6D5hH",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-21T16:32:21.000Z",
+  "versionId": "de2c7c90-7ad0-40ad-a10d-dafcebf072b4"
+}
