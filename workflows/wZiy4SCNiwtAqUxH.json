@@ -1,0 +1,879 @@
+{
+  "active": true,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Answer questions with a vector store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Answer questions with a vector store",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Answer questions with a vector store",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store2",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader1": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store2",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter1": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader1",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-24T09:41:39.662Z",
+  "id": "wZiy4SCNiwtAqUxH",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "crypto-current-workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "mode": "webhook",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -540,
+        -160
+      ],
+      "id": "6e305437-8ec9-4d96-8ff0-0552ccf108e4",
+      "name": "When chat message received",
+      "webhookId": "9ec3d0cf-81cf-4633-88ee-740263aed85c"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a chatbot for CryptoCurrent, a platform that aggregates the latest cryptocurrency news from top sources like CoinDesk, Bitcoinist, Cointelegraph, Decrypt, BSC News, The Guardian, and Cryptodaily. Your role is to assist users in navigating the platform, understanding its features, and providing information about the crypto news it curates.\n\nYou have access to a detailed document that contains all the necessary information about CryptoCurrent, including its purpose, features, and the sources it aggregates news from. Use this document to answer user questions accurately.\n\nFor dynamic content such as current news articles or cryptocurrency prices, you may need to indicate that the information is subject to change and suggest that users check the website directly for the most up-to-date information.\n\nNote that CryptoCurrent is an evolving platform, and while the current feature set focuses on news aggregation, additional features may be introduced in the future.\n\nRespond in a friendly and informative manner, ensuring that your answers are clear and helpful."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        -320,
+        -240
+      ],
+      "id": "98fae98c-4303-45fa-aa83-43a080230760",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -460,
+        60
+      ],
+      "id": "7b4b6a4b-9723-44b0-ad42-94d3c764805d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "W612lICBDO5NQYnR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -320,
+        100
+      ],
+      "id": "d3692474-5498-41d0-a24b-ec1d7b6ee38d",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "name": "CryptoCurrent_Vector_Store",
+        "description": "This vector store contains embeddings of CryptoCurrent's comprehensive documentation, enabling semantic search and retrieval for the AI chatbot. It supports accurate responses to user queries about the platform's features, aggregated news sources (e.g., CoinDesk, Bitcoinist), and usage instructions."
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        60
+      ],
+      "id": "5080f09c-5031-4d04-aca3-970a2a9c5d9f",
+      "name": "Answer questions with a vector store"
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "crypto-current",
+          "mode": "list",
+          "cachedResultName": "crypto-current"
+        },
+        "options": {
+          "pineconeNamespace": "web-info-crypto"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.1,
+      "position": [
+        -260,
+        260
+      ],
+      "id": "f2b04956-dc98-4401-8de1-a608cf04cc8c",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "FAbJuCKY6RfM1KJ5",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -360,
+        400
+      ],
+      "id": "b0f6b08a-84b6-45c9-a96b-4d661b34b0b2",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "W612lICBDO5NQYnR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        60,
+        280
+      ],
+      "id": "ce4f4d66-ae04-4873-b891-084149cf6681",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "W612lICBDO5NQYnR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1SL8bX_urjY-Hy-jryFnJjZ14T2SM8Ls9",
+          "mode": "list",
+          "cachedResultName": "crypto-current-n8n",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1SL8bX_urjY-Hy-jryFnJjZ14T2SM8Ls9"
+        },
+        "event": "fileUpdated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        -800
+      ],
+      "id": "63d7e280-d9ab-44f1-80d7-9446156a99d0",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "TqDzDz6s1NjnArjM",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1ef8zI09v_eujjd9IPD3GlGipGwCFi3KK"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -440,
+        -800
+      ],
+      "id": "2cf4a9d5-bf26-4844-b398-bf022073751e",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "TqDzDz6s1NjnArjM",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "file",
+                "value": "={{ $json.name }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        40,
+        -560
+      ],
+      "id": "7ffc82a4-63b1-4bf2-8d1a-98d333a05d2e",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkSize": 500,
+        "chunkOverlap": 20,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -420
+      ],
+      "id": "c24ea0d9-171b-4fcd-8f9e-6d7a9e648e1d",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "crypto-current",
+          "mode": "list",
+          "cachedResultName": "crypto-current"
+        },
+        "options": {
+          "pineconeNamespace": "libray-greenleaf"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.1,
+      "position": [
+        -180,
+        -820
+      ],
+      "id": "b6d635c4-c835-4150-acef-f1acb33bbf6a",
+      "name": "Pinecone Vector Store1",
+      "credentials": {
+        "pineconeApi": {
+          "id": "FAbJuCKY6RfM1KJ5",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -240,
+        -600
+      ],
+      "id": "ca624859-da5f-41ad-bb2e-b842c9158f45",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "W612lICBDO5NQYnR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Google Drive Info\n** This will be feeding the Pinecode Vector Store with documents from goggle drive.",
+        "height": 240
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1000,
+        -980
+      ],
+      "id": "d5859afc-e2d2-4402-be37-09dd3d44b5de",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "### This is the Chat RAG system the retrived the  Information from the Vector Store. ",
+        "height": 260
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -900,
+        -320
+      ],
+      "id": "9f1e4d5b-3434-4830-a49d-75f9d5b254c8",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        40
+      ],
+      "id": "8116254f-0949-41bb-9ad9-6bcd580fb130",
+      "name": "SerpAPI",
+      "credentials": {
+        "serpApi": {
+          "id": "azxH0vEnXmHAuHDK",
+          "name": "SerpAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"suffixes\": [\"coindesk\", \"cointelegraph\", \"bitcoinist\", \"decrypt\", \"bsc\", \"theguardian\", \"cryptodaily\"]\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -540,
+        -1420
+      ],
+      "id": "efe24653-b756-4145-9eb5-76e9404380b4",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -760,
+        -1520
+      ],
+      "id": "d58cd71e-df06-41c2-b4ce-72b39de1afcd",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "suffixes",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -1420
+      ],
+      "id": "aadf61e6-5131-474d-86d8-3e2e9a774ac4",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst items = $input.all()\n\nreturn items.map(item => {\n  const baseUrl = \"https://cryptocurrency-news2.p.rapidapi.com/v1/\";\n  const suffix = item.json.suffixes;\n  return {\n    json: {\n      ...item.json,\n      url: baseUrl + suffix\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -100,
+        -1400
+      ],
+      "id": "763aa69a-b879-4aec-addc-eaf639c28bfe",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        140,
+        -1400
+      ],
+      "id": "ac31bef5-c965-4716-89d5-92280f344979",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "cryptocurrency-news2.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "cf4e7ad37emsh5b6c71d668d7381p172c03jsn21817ac04af5"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        340,
+        -1260
+      ],
+      "id": "5cc3dd85-7bc6-4115-a669-9b67a4c568d9",
+      "name": "HTTP Request",
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "executeOnce": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "crypto-current",
+          "mode": "list",
+          "cachedResultName": "crypto-current"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        -1560
+      ],
+      "id": "12d86b7d-5b75-45c0-a4ef-136a63b19656",
+      "name": "Pinecone Vector Store2",
+      "credentials": {
+        "pineconeApi": {
+          "id": "FAbJuCKY6RfM1KJ5",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        780,
+        -1340
+      ],
+      "id": "b23e8906-2ee6-450a-993a-e8ee21efe0cb",
+      "name": "Embeddings OpenAI2",
+      "credentials": {
+        "openAiApi": {
+          "id": "W612lICBDO5NQYnR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        -1320
+      ],
+      "id": "af30de15-f1f6-4fde-9473-aa2bb00e3050",
+      "name": "Default Data Loader1"
+    },
+    {
+      "parameters": {
+        "chunkSize": 500,
+        "chunkOverlap": 20,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        -1100
+      ],
+      "id": "d6e16556-6a48-41d8-b3ff-ac05e6e94167",
+      "name": "Recursive Character Text Splitter1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fa3fb474-e0a2-4e77-bdd1-b63c3f8dd468",
+              "name": "title",
+              "value": "={{ $json.data[0].title }}",
+              "type": "string"
+            },
+            {
+              "id": "c9526191-4b48-4e9f-8654-df1946b3af2b",
+              "name": "description",
+              "value": "={{ $json.data[0].description }}",
+              "type": "string"
+            },
+            {
+              "id": "a6bb7074-8261-4cfb-81c3-458457939dce",
+              "name": "source-url",
+              "value": "={{ $json.data[0].url }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        580,
+        -1200
+      ],
+      "id": "fa9d3519-422d-44dd-9713-9ec5ba42abe5",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -760,
+        -1300
+      ],
+      "id": "96272f4e-26eb-4d92-a467-19261d7b6a78",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "content": "## Rapid API Info\n**This will be feeding the Pinecode vector-Store with Info from rapid-API https://cryptocurrency-news2.p.rapidapi.com/v1/. [Guide](https://docs.n8n.io/workflows/sticky-notes/)",
+        "height": 200,
+        "width": 360
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1180,
+        -1720
+      ],
+      "id": "e5535d0f-da10-4787-9cd5-03ab263eeab5",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Google Drive Trigger": {
+      "lastTimeChecked": "2025-04-24T22:00:19Z"
+    },
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 4,
+  "updatedAt": "2025-04-24T15:35:02.000Z",
+  "versionId": "e7104161-3cc3-4471-8e96-cc7126d8ab44"
+}
