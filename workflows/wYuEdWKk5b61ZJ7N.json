@@ -55,7 +55,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow 9",
+  "name": "RSS practice",
   "nodes": [
     {
       "parameters": {},
@@ -180,6 +180,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-22T16:03:48.000Z",
-  "versionId": "fe303c36-3ffc-4dec-bf74-5fbad89a7912"
+  "updatedAt": "2025-04-24T12:35:18.000Z",
+  "versionId": "a886ec40-d2f1-4740-8a10-ce64f3076522"
 }
