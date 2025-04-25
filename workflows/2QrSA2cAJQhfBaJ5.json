@@ -62,7 +62,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow 6",
+  "name": "SerpAPI",
   "nodes": [
     {
       "parameters": {
@@ -170,6 +170,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-22T09:05:39.000Z",
-  "versionId": "0da6f951-21c6-49f9-b53b-4f6531167161"
+  "updatedAt": "2025-04-24T12:35:42.000Z",
+  "versionId": "d0fef107-6d33-4080-87c2-2f27d1444450"
 }
