@@ -34,7 +34,7 @@
   "createdAt": "2025-04-09T05:10:12.538Z",
   "id": "e4sbpPqf0Iyag4f9",
   "meta": null,
-  "name": "My workflow 4",
+  "name": "Form-trigger",
   "nodes": [
     {
       "parameters": {
@@ -66,7 +66,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -126,6 +127,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-09T05:10:12.538Z",
-  "versionId": "77afa2ee-2a8c-4051-a5ae-38f171e82cfb"
+  "updatedAt": "2025-04-24T15:38:14.000Z",
+  "versionId": "2073b39d-3102-4840-b2e1-fea4f584f6fd"
 }
