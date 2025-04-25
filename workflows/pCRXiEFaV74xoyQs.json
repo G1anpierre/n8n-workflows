@@ -6,7 +6,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow 5",
+  "name": "Simpre Webhook",
   "nodes": [
     {
       "parameters": {
@@ -39,6 +39,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-21T16:22:52.000Z",
-  "versionId": "3844e16f-33c6-4e66-a5ff-913d74fd3fb6"
+  "updatedAt": "2025-04-24T15:39:57.000Z",
+  "versionId": "ce4813a5-7c5b-4b5f-b442-2861c98701dd"
 }
