@@ -74,7 +74,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow",
+  "name": "Translate with OpenAI",
   "nodes": [
     {
       "parameters": {},
@@ -183,7 +183,7 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        700,
+        720,
         0
       ],
       "id": "6f3d5368-79c7-4b60-a580-a43a55a55f86",
@@ -310,6 +310,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-21T16:32:21.000Z",
-  "versionId": "de2c7c90-7ad0-40ad-a10d-dafcebf072b4"
+  "updatedAt": "2025-04-24T15:39:32.000Z",
+  "versionId": "ea014fe0-c8b7-4619-a81a-1eb2a39543b3"
 }
