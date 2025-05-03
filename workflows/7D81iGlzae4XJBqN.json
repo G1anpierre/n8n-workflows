@@ -27,7 +27,7 @@
   "createdAt": "2025-05-01T14:56:55.625Z",
   "id": "7D81iGlzae4XJBqN",
   "meta": null,
-  "name": "My workflow",
+  "name": "Dashboard-workflows",
   "nodes": [
     {
       "parameters": {
@@ -83,7 +83,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        460,
+        520,
         0
       ],
       "id": "748d1a3b-8059-4861-800d-66010677ff0b",
@@ -97,6 +97,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-05-01T14:56:55.000Z",
-  "versionId": "24df66fd-9692-460c-ba83-2d3bed4a67d7"
+  "updatedAt": "2025-05-02T16:58:32.000Z",
+  "versionId": "ffe02f87-d25e-43b6-995b-d9a3bf1aab14"
 }
