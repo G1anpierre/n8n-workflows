@@ -1,0 +1,249 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get Airbnb Tool - MCP Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Airbnb Tool - MCP Client": {
+      "main": [
+        [
+          {
+            "node": "Execute Airbnb Tool - MCP Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airbnb Tools": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airbnb Execute": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-03T10:09:06.013Z",
+  "id": "jSKr6kOjSQIUrQnn",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "MCP",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b2837d39-3867-4366-8431-a53e93394043",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-mcp.mcpClient",
+      "typeVersion": 1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "7dde2ef4-bc9b-4871-a7f0-b6278eeef4d3",
+      "name": "Get Airbnb Tool - MCP Client",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "bRJho3rJVvMyvnjv",
+          "name": "Airbnb"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeTool",
+        "toolName": "={{ $json.tools[0].name }}",
+        "toolParameters": "{\n  \"location\": \"Lugano\" \n}"
+      },
+      "type": "n8n-nodes-mcp.mcpClient",
+      "typeVersion": 1,
+      "position": [
+        440,
+        0
+      ],
+      "id": "936ff14e-1be0-446b-94f0-ee25fbdb7290",
+      "name": "Execute Airbnb Tool - MCP Client",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "bRJho3rJVvMyvnjv",
+          "name": "Airbnb"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        280,
+        300
+      ],
+      "id": "252ff14f-0d4d-490f-b0a2-714ef341d80e",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        120,
+        520
+      ],
+      "id": "85479dcb-132b-46eb-8960-e0bdfd2b856f",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "W612lICBDO5NQYnR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        60,
+        300
+      ],
+      "id": "f7dc15d0-adfc-46e9-8d57-128d41e4e88d",
+      "name": "When chat message received",
+      "webhookId": "73b8c320-f94d-4e5f-a5de-95b99ed5a576"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        440,
+        540
+      ],
+      "id": "f76825b7-ec22-49e2-83fd-9c30b813f3b1",
+      "name": "Airbnb Tools",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "bRJho3rJVvMyvnjv",
+          "name": "Airbnb"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeTool",
+        "toolName": "={{ $fromAI(\"tool\", \"the tool selected\") }}",
+        "toolParameters": "=\n"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        560,
+        520
+      ],
+      "id": "80bf1df4-502b-4de9-8e20-001f1d788e52",
+      "name": "Airbnb Execute",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "bRJho3rJVvMyvnjv",
+          "name": "Airbnb"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        320,
+        500
+      ],
+      "id": "bd0d7d33-44d5-4db2-9f4f-65327dd001a9",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-03T13:41:26.000Z",
+  "versionId": "297593f3-1c6b-4275-a502-c2a5980260e8"
+}
