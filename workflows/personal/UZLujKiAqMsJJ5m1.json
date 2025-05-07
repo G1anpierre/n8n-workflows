@@ -1,0 +1,294 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-25T19:13:54.934Z",
+  "id": "UZLujKiAqMsJJ5m1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Whatsapp",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gianpierreAI",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -180,
+        -100
+      ],
+      "id": "4f4e5ef6-0cee-44ed-9bed-f4197d01c8e9",
+      "name": "Webhook",
+      "webhookId": "def8676d-63ee-47b3-9ef9-0ef17225dba3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "878a890c-db5a-4eaa-b4d7-812c13273714",
+              "name": "chatId",
+              "value": "={{ $json.body.data.key.remoteJid }}",
+              "type": "string"
+            },
+            {
+              "id": "3beb0e1a-b5af-46e6-9ec6-59fc5b882654",
+              "name": "instance_name",
+              "value": "={{ $json.body.instance }}",
+              "type": "string"
+            },
+            {
+              "id": "c5b8fe2f-1b78-491c-8b44-782e10896d3c",
+              "name": "server_url",
+              "value": "={{ $json.body.server_url }}",
+              "type": "string"
+            },
+            {
+              "id": "bbeff226-f7ce-4572-bc3e-9bee38d4b02c",
+              "name": "apiKey",
+              "value": "={{ $json.body.apikey }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        40,
+        -100
+      ],
+      "id": "fdc3a74f-634a-4f77-aad7-78ea796c5542",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        100,
+        140
+      ],
+      "id": "4ab44b11-3ec4-42a8-b480-772274c59101",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "W612lICBDO5NQYnR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.chatId }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        280,
+        160
+      ],
+      "id": "76dc3c88-8f21-46da-a3f6-ecf13ef09fe8",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=El usuario envia el siguiente mensaje:\nuser_name:{{ $json.chatId }}\nmensaje: {{ $('Webhook').item.json.body.data.message.conversation }}",
+        "options": {
+          "systemMessage": "Eres el asistente de Gianpierre Fernandez"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        260,
+        -100
+      ],
+      "id": "f2cad4de-bce0-47a1-97e4-e97282126ee1",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Edit Fields').item.json.server_url }}/message/sendText/{{ $('Edit Fields').item.json.instance_name }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apiKey",
+              "value": "={{ $('Edit Fields').item.json.apiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "={{ $('Edit Fields').item.json.chatId }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.output }}"
+            },
+            {
+              "name": "delay",
+              "value": "={{3000}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        620,
+        -100
+      ],
+      "id": "be917bf4-66b7-422c-95b1-89c586ff79d1",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.gianpitrin8n.xyz",
+            "user-agent": "axios/1.7.9",
+            "content-length": "908",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "x-forwarded-for": "134.209.200.162",
+            "x-forwarded-host": "n8n.gianpitrin8n.xyz",
+            "x-forwarded-proto": "https"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "messages.upsert",
+            "instance": "GianpierreBot",
+            "data": {
+              "key": {
+                "remoteJid": "41774521820@s.whatsapp.net",
+                "fromMe": false,
+                "id": "6CA264CC443ECEE21C2A878CFAD50B49"
+              },
+              "pushName": "Elli",
+              "status": "DELIVERY_ACK",
+              "message": {
+                "conversation": "Nock nock",
+                "messageContextInfo": {
+                  "deviceListMetadata": {
+                    "senderKeyHash": "UQGYWu6MLmyv8A==",
+                    "senderTimestamp": "1744542799",
+                    "recipientKeyHash": "+m86DcYXUdpXCQ==",
+                    "recipientTimestamp": "1745607219"
+                  },
+                  "deviceListMetadataVersion": 2,
+                  "messageSecret": "fw+mAsyHp6/kg65hTGjbJnQpy9PAWiWTie95fKQ+SmI="
+                }
+              },
+              "messageType": "conversation",
+              "messageTimestamp": 1745608516,
+              "instanceId": "3db826d5-6cb5-4261-9e34-fc6dfc6c7396",
+              "source": "android"
+            },
+            "destination": "https://n8n.gianpitrin8n.xyz/webhook/gianpierreAI",
+            "date_time": "2025-04-25T16:15:17.094Z",
+            "sender": "41797254474@s.whatsapp.net",
+            "server_url": "https://n8n-evolution-api.q193as.easypanel.host",
+            "apikey": "ADA519D400D0-437F-B4CB-0E6B783446F0"
+          },
+          "webhookUrl": "https://n8n.gianpitrin8n.xyz/webhook/gianpierreAI",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-05-06T09:24:57.329Z",
+      "updatedAt": "2025-05-06T09:24:57.329Z",
+      "id": "HJ8g9TQ4BBAD15s1",
+      "name": "personal"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-05-06T09:24:59.000Z",
+  "versionId": "801750f6-6629-4856-a167-a31a1aaff628"
+}
