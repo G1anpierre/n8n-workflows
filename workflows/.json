@@ -1,0 +1,24 @@
+{
+  "body": {
+    "workflowId": "cUj05qanAhORpeYm"
+  },
+  "executionMode": "production",
+  "headers": {
+    "host": "n8n.gianpitrin8n.xyz",
+    "user-agent": "node",
+    "content-length": "33",
+    "accept": "*/*",
+    "accept-encoding": "br, gzip, deflate",
+    "accept-language": "*",
+    "content-type": "application/json",
+    "sec-fetch-mode": "cors",
+    "via": "1.1 Caddy",
+    "x-forwarded-for": "193.5.232.189",
+    "x-forwarded-host": "n8n.gianpitrin8n.xyz",
+    "x-forwarded-proto": "https",
+    "x-n8n-api-key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YzI0YmZkZS02NDNjLTQ3ZjUtYmVmZC04NTI3N2M3YzFhZDAiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwiaWF0IjoxNzQ2MTA5MDM0fQ.UJSg4LCHFnitGcH9D6nYyEb84NtriZ1eFrDH5Vx6eh0"
+  },
+  "params": {},
+  "query": {},
+  "webhookUrl": "https://n8n.gianpitrin8n.xyz/webhook/launch"
+}
