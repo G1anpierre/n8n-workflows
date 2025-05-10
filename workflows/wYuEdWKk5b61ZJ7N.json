@@ -177,9 +177,13 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
+  "staticData": {
+    "node:RSS Feed Trigger": {
+      "lastItemDate": "2025-05-09T21:00:15.000Z"
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-04-24T12:35:18.000Z",
+  "triggerCount": 1,
+  "updatedAt": "2025-05-09T21:15:28.540Z",
   "versionId": "a886ec40-d2f1-4740-8a10-ce64f3076522"
 }
