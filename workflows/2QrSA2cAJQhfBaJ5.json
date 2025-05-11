@@ -55,6 +55,17 @@
           }
         ]
       ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-21T14:11:27.669Z",
@@ -161,6 +172,17 @@
       ],
       "id": "d5b5221a-3ff5-4f38-a9c4-e665f8e9e253",
       "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        -180
+      ],
+      "id": "a68873e9-f5f8-4a25-a0ff-39b8fed578ec",
+      "name": "When clicking ‘Test workflow’"
     }
   ],
   "pinData": {},
@@ -170,6 +192,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-05-09T21:13:59.213Z",
-  "versionId": "d0fef107-6d33-4080-87c2-2f27d1444450"
+  "updatedAt": "2025-05-10T18:48:04.226Z",
+  "versionId": "2f297af4-9e72-40d6-abb1-1cc08859dcee"
 }
